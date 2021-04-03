@@ -25,7 +25,7 @@ To run *(iii)*:
 #### python run_from_fast5.py path_to_fast5_folder 
   (e.g. python run_from_fast5.py /home/MinION/my_fast5_folder)
 
-Once the 16S_ppm folder is downloaded (e.g. in /home/user/, creating a working folder /home/user/16S_ppm) the pipeline should be ready to run (if not, check all scripts have permissions to run; else, set with chmod -R).
+Once the 16S_ppm folder is downloaded (e.g. in /home/user/, creating a working folder /home/user/16S_ppm) the pipeline should be ready to run (IMPORTANT NOTE: check that all scripts have permissions to run; else, set with chmod; e.g. in 16S_ppm root folder, type "chmod -R a+x bin/").
 
 ### Requirments
 Python 3 (3.4 or newer)
@@ -39,7 +39,7 @@ Nanofilt (version 2.5.0, or newer) or Filtlong (v0.2.0, or newer) are used for f
 They contribute to the pipeline only if you wish to filter reads (by quality and size and/or barcode sequence removal) after basecalling and before classification; this step is not necessary. These programs are available at Porechop (https://github.com/rrwick/Porechop) and Filtlong (https://github.com/rrwick/Filtlong); if you don't have these programs already installed, binaries of Porechop and Filtlong (both with GNU licences) are provided with this distribution (in bin subfolder, with paths accordingly set in the configuration file); blastn (with its NCBI license) executable is also included (in bin subfolder). These programs should work "out of the box" (if activated; see configuration file, below).
 \
 Instead, Guppy must be INSTALLED BY THE USER, and its path accordingly specified in the configuration file (configuration.cfg). If you do not have access to fast5 file (raw sequencing data, before basecalling) you do NOT need guppy (and can skip the following paragraph). Instead, if you do and if you want to run the analysis from  raw sequencing data, you need to have access to Guppy (ONT proprietary basecaller). 
-If you are a registered ONT user and have access to the ONT community, a simple solution is to donwload Guppy binaries and move (or copy) the ont-guppy-cpu folder (containing all Guppy scripts and data) in the 16S_ppm/bin subdirectory (where other dependencies are; e.g. 16S_ppm/bin/ont-guppy-cpu/): in this case, no change is needed to the configuration file (as it points to bin subfolder, by default; i.e. guppy_dir=bin/ont-guppy-cpu/). Else, edit the configuration file accordingly, with your guppy folder path; e.g. guppy_dir=/usr/bin/ont-guppy-cpu/). 
+If you are a registered ONT user and have access to the ONT community, the simplest solution could be to donwload Guppy binaries and move (or copy) the ont-guppy-cpu folder (containing all Guppy scripts and data) in the 16S_ppm/bin subdirectory (where other dependencies are; e.g. 16S_ppm/bin/ont-guppy-cpu/): in this case, no change is needed to the configuration file (as it points to bin subfolder, by default; i.e. guppy_dir=bin/ont-guppy-cpu/). Else, edit the configuration file accordingly, with your guppy folder path; e.g. guppy_dir=/usr/bin/ont-guppy-cpu/). 
 \
 An open source alternative for ONT basecall is Chiron (https://github.com/haotianteng/Chiron). In this case, run the basecaller separately, and then use run_from_fasta.py on the basecalled reads.
 The pipeline was tested on Ubuntu 14.04 LTS (mainly) and 16.04 LTS.
@@ -62,7 +62,7 @@ The list of options available in the configuration file are detailed below (afte
 \
 *Nanoflt_runner=/home/user/bin/NanoFilt* -----> path for Nanofilt, if installed
 \
-*Filtlong_runner=bin/Filtlong-master/bin/filtlong*	-----> path for Filtlong (in 16S_ppm/bin subfolder), runs automatically if Nanofilt is not found
+*Filtlong_runner=bin/Filtlong-master/filtlong*	-----> path for Filtlong (in 16S_ppm/bin subfolder), runs automatically if Nanofilt is not found
 \
 *Nanofilt=0*	  -----> activate Nanofilt OR Filtlong (0= NOT active; 1= run Nanofilt OR Filtlong)
 \
